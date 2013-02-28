@@ -1,0 +1,4 @@
+practices
+=========
+
+Some coding practices.
