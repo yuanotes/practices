@@ -1,7 +1,7 @@
-package qsort
+package main
 
 import (
-	"fmt"
+	//"fmt"
     "utils"
 )
 
@@ -25,5 +25,5 @@ func qsort1(l, u int, array []int) {
 func main() {
 	array := utils.GetIntSlice(100000)
 	utils.PrintRunningTime(qsort1, 0, len(array)-1, array)
-	fmt.Println(array)
+    //fmt.Println(array)
 }
