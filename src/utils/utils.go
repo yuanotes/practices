@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"fmt"
@@ -8,14 +8,14 @@ import (
 	"time"
 )
 
-func swap(a, b int, array []int) {
+func Swap(a, b int, array []int) {
 	// can't use xor when a == b
 	temp := array[a]
 	array[a] = array[b]
 	array[b] = temp
 }
 
-func get_int_array(length int) []int {
+func GetIntSlice(length int) []int {
 	array := make([]int, length)
 	rand.Seed(time.Now().UTC().UnixNano())
 	for i, _ := range array {
@@ -24,31 +24,7 @@ func get_int_array(length int) []int {
 	return array
 }
 
-func qsort1(l, u int, array []int) {
-	if l >= u {
-		return
-	}
-	m := l
-	// find the position of array[l]
-	for i := l + 1; i <= u; i++ {
-		if array[i] < array[l] {
-			m += 1
-			swap(m, i, array)
-		}
-	}
-	swap(m, l, array)
-	qsort1(l, m-1, array)
-	qsort1(m+1, u, array)
-}
-
-func main() {
-	array := get_int_array(1000000)
-	get_running_time(qsort1, 0, len(array)-1, array)
-	get_running_time(get_int_array, 100)
-	fmt.Println(array)
-}
-
-func get_running_time(fun interface{}, params ...interface{}) {
+func PrintRunningTime(fun interface{}, params ...interface{}) {
 	fun_name := runtime.FuncForPC(reflect.ValueOf(fun).Pointer()).Name()
 	function := reflect.ValueOf(fun)
 	args := []reflect.Value{}
