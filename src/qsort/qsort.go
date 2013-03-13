@@ -1,29 +1,43 @@
-package main
+package qsort
 
-import (
-	//"fmt"
-    "utils"
-)
-
-func qsort1(l, u int, array []int) {
+func Qsort1(l, u int, array []int) {
 	if l >= u {
 		return
 	}
 	m := l
 	// find the position of array[l]
-	for i := l + 1; i <= u; i++ {
+	for i := l + 1; i <= u; i ++ {
 		if array[i] < array[l] {
 			m += 1
-			utils.Swap(m, i, array)
+            array[m], array[i] = array[i], array[m]
 		}
 	}
-	utils.Swap(m, l, array)
-	qsort1(l, m-1, array)
-	qsort1(m+1, u, array)
+    array[m], array[l] = array[l], array[m]
+	Qsort1(l, m-1, array)
+	Qsort1(m+1, u, array)
 }
 
-func main() {
-	array := utils.GetIntSlice(100000)
-	utils.PrintRunningTime(qsort1, 0, len(array)-1, array)
-    //fmt.Println(array)
+func Qsort3(l, u int, array []int) {
+    // Partition on both side.
+    if l>=u {
+        return
+    }
+    t := array[l]
+    i := l + 1;
+    j := u;
+    for {
+        if i<=u && array[i] < t {
+            i += 1
+        }
+        if array[j] > t {
+            j -= 1
+        }
+        if i > j {
+            break
+        }
+        array[i], array[j] = array[j], array[i]
+    }
+    array[l], array[j] = array[j], array[l]
+    Qsort3(l, j-1, array)
+    Qsort3(j+1, u, array)
 }

@@ -8,19 +8,36 @@ import (
 	"time"
 )
 
-func Swap(a, b int, array []int) {
-	// can't use xor when a == b
-	temp := array[a]
-	array[a] = array[b]
-	array[b] = temp
+func Equal(a, b []int) bool {
+    if len(a) != len(b) {
+        return false
+    }
+    for i, c := range a {
+        if c != b[i] {
+            return false
+        }
+    }
+    return true
 }
 
-func GetIntSlice(length int) []int {
-	array := make([]int, length)
+func CopySlice(a []int) []int {
+    b := make([]int, len(a), cap(a))
+    copy(b, a)
+    return b
+}
+
+func GetIntSlice(length int, equal bool) []int {
 	rand.Seed(time.Now().UTC().UnixNano())
-	for i, _ := range array {
-		array[i] = rand.Intn(100)
-	}
+    var array []int
+    if equal {
+        array := make([]int, length)
+        value := rand.Int()
+        for i,_ := range array {
+            array[i] = value
+        }
+    } else {
+        array = rand.Perm(length)
+    }
 	return array
 }
 
