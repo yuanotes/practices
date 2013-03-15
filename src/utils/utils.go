@@ -8,6 +8,17 @@ import (
 	"time"
 )
 
+func GetRandInt(low, up int) int {
+    // Get a random int between [low, up)
+    if low >= up {
+        return up
+    }
+    rand.Seed(time.Now().UTC().UnixNano())
+    count := up - low
+    value := rand.Intn(count)
+    return low + value
+}
+
 func Equal(a, b []int) bool {
     if len(a) != len(b) {
         return false
