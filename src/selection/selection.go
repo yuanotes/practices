@@ -1,4 +1,4 @@
-package ksmallest
+package selection
 
 import (
     "utils"
